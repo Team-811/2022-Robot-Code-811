@@ -1,15 +1,20 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.hal.CANData;
+import edu.wpi.first.hal.PWMJNI;
+import edu.wpi.first.hal.can.CANJNI;
+import edu.wpi.first.wpilibj.CAN;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.lib.Drive;
 import frc.robot.lib.Output;
 
-//this is a test
-
-//this is a test part two
 
 public class Drivetrain extends SubsystemBase implements ISubsystem{
 
@@ -17,16 +22,17 @@ public class Drivetrain extends SubsystemBase implements ISubsystem{
     public static Drivetrain getInstance() {
         return instance;
       }
-
-    private Talon leftWheels;
-    private Talon rightWheels;
+      
+    private CANSparkMax leftWheels;
+    private CANSparkMax rightWheels;
     private Drive drivetrain;
     private Output driveOutput;
+      
 
 
     public Drivetrain(){
-        leftWheels = new Talon(0);
-        rightWheels= new Talon(1);
+        leftWheels = new CANSparkMax(RobotMap.DRIVE_TRAIN_LEFT, MotorType.kBrushless);
+        rightWheels= new CANSparkMax(RobotMap.DRIVE_TRAIN_RIGHT, MotorType.kBrushless);
         resetSubsystem();
     }
 
